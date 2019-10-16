@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+{% extends 'basicApp/base.html' %}
+{% load staticfiles %}
+
+{% block body_block}
+<div class="jumbotron">
+    {% if %}
+    <h2> Thank you for the registration. </h2> 
+    {% else %}
+    <h2> Register here!</h2>
+    <hr>
+    <h3> Please Fill Up The Link Below: </h3>
+    <!-- Add the enctype to load the image. -->
+    <form action="" method="post" enctype="multipart/form-data">  
+        {% csrf_token %}
+        {{ userForm.as_p }}
+        {{% profileForm.as_p %}}
+        <input type="button" class="btn btn-primary" value="register">
+    </form>
+    {% endif %}
+</div>
+{% endblock %}

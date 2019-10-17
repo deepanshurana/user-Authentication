@@ -18,10 +18,15 @@
             </button>
             <div class="collapse navbar-collapse" id="togglebutton"> <!--  don't be seen as a list in downside-->
             <ul class="navbar-nav mr-auto"> <!-- margin left automatically puts items on the left side. -->
-            <li class="nav-item"><a href="{% url 'basicApp:index' %}" class="nav-link" >Index </a></li> 
+            <li class="nav-item"><a href="{% url 'admin:index' %}" class="nav-link" >Admin</a></li> 
      <!-- specify nav links for merge in navbar, otherwise they will be visible as a simple blue links. -->
             <li class="nav-item"><a href="{% url 'basicApp:registration' %}" class="nav-link" >Register Here</a></li>
-            <li class="nav-item"><a href="{% url 'basicApp:login' %}" class="nav-link" >Login</a></li>
+           {% if user.is_authenticated %}
+                <li class="nav-item"><a href="{% url 'logout' %}" class='nav-link'>LogOUT</a></li>
+                
+            {% else %}
+                <li class="nav-item"><a href="{% url 'basicApp:login' %}" class='nav-link'>LogIN</a></li>     
+            {% endif %}
                 <!-- dropdown menu in navbar -->
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="id_1" data-toggle="dropdown">Dropdown Menu</a>
@@ -29,7 +34,7 @@
                     <a class="dropdown-item" href="https://www.google.co.in">Go to Google</a>
                     <a class="dropdown-item" href="https://www.youtube.com">Go to Youtube</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="navbar.html">Return to Homepage</a>
+                    <a class="dropdown-item" href="{% url 'index' %}">Return to Homepage</a>
                     
             <li class="nav-item"><a class="nav-link disabled">Don't touch </a></li>
                 </div>
@@ -46,7 +51,7 @@
     </nav>
     
     <div class="container">
-    {% block body_content %}
+    {% block body_block %}
     <!--outside this block gets inherited by other templates.<-->
     {% endblock %}
     </div>
